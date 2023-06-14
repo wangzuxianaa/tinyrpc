@@ -1,5 +1,7 @@
 package com.johnchan.test;
 
+import com.johnchan.rpc.core.registry.ServiceRegistry;
+import com.johnchan.rpc.core.registry.impl.ServiceRegistryImpl;
 import com.johnchan.rpc.core.server.RpcServer;
 import com.johnchan.tinyrpc.api.HelloService;
 
@@ -15,7 +17,9 @@ import com.johnchan.tinyrpc.api.HelloService;
 public class TestServer {
     public static void main(String[] args) {
         HelloService helloService = new HelloServiceImpl();
-        RpcServer rpcServer = new RpcServer();
-        rpcServer.register(helloService, 8090);
+        ServiceRegistry serviceRegistry = new ServiceRegistryImpl();
+        serviceRegistry.register(helloService);
+        RpcServer rpcServer = new RpcServer(serviceRegistry);
+        rpcServer.start(9000);
     }
 }

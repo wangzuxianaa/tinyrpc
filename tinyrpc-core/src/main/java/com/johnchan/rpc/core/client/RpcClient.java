@@ -1,6 +1,7 @@
 package com.johnchan.rpc.core.client;
 
 import com.johnchan.rpc.common.entity.RpcRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +19,8 @@ import java.net.Socket;
  * @date: 2023/6/6 23:03
  * @version: 1.0
  */
+@Slf4j
 public class RpcClient {
-    private static final Logger logger = LoggerFactory.getLogger(RpcClient.class);
-
     /*
      * @param rpcRequest:
      * @param host:
@@ -38,7 +38,7 @@ public class RpcClient {
             objectOutputStream.flush();
             return objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            logger.error("调用的时候发生错误" + e);
+            log.error("调用的时候发生错误" + e);
             return null;
         }
     }
