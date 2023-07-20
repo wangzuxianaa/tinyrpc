@@ -2,7 +2,7 @@ package com.johnchan.test;
 
 import com.johnchan.rpc.core.registry.ServiceRegistry;
 import com.johnchan.rpc.core.registry.impl.ServiceRegistryImpl;
-import com.johnchan.rpc.core.server.RpcServer;
+import com.johnchan.rpc.core.server.RpcServerImpl;
 import com.johnchan.tinyrpc.api.HelloService;
 
 /**
@@ -19,7 +19,7 @@ public class TestServer {
         HelloService helloService = new HelloServiceImpl();
         ServiceRegistry serviceRegistry = new ServiceRegistryImpl();
         serviceRegistry.register(helloService);
-        RpcServer rpcServer = new RpcServer(serviceRegistry);
+        RpcServerImpl rpcServer = new RpcServerImpl(serviceRegistry);
         rpcServer.start(9000);
     }
 }

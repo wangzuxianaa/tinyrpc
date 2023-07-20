@@ -1,45 +1,15 @@
 package com.johnchan.rpc.core.client;
 
+
 import com.johnchan.rpc.common.entity.RpcRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-
-/**
- * @projectName: tinyrpc
- * @package: com.johnchan.rpc.core.client
- * @className: RpcClient
- * @author: johnchan
- * @description: 远程方法调用的客户端
- * @date: 2023/6/6 23:03
- * @version: 1.0
+/*
+ * @author johnchan
+ * @description 客户端类通用接口
+ * @date 2023/7/14 11:51
  */
-@Slf4j
-public class RpcClient {
-    /*
-     * @param rpcRequest:
-     * @param host:
-     * @param ip:
-     * @return Object
-     * @author 陈延超
-     * @description 向服务端去发送请求
-     * @date 2023/6/6 23:06
-     */
-    public Object sendRequest(RpcRequest rpcRequest, String host, int ip) {
-        try (Socket socket = new Socket(host, ip)) {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            objectOutputStream.writeObject(rpcRequest);
-            objectOutputStream.flush();
-            return objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            log.error("调用的时候发生错误" + e);
-            return null;
-        }
-    }
+public interface RpcClient {
+
+    Object sendRequest(RpcRequest rpcRequest);
+
 }
